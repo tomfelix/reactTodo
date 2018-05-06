@@ -14,9 +14,17 @@ const List = props => {
         let index = todo.index;
         return (
           <ListGroupItem key={todo.index} className="list-group-item">
-          <Checkbox onClick={() => props.isSelected(todo)} className="float-left" ></Checkbox>
-          <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
-          <Button onClick={() => props.removeItem(index)} className="float-right" bsStyle="danger">X</Button>
+            <Row className="show-grid">
+              <Col xs={4} md={4}>
+                <Checkbox onClick={() => props.isSelected(todo)} className="float-left" ></Checkbox>
+              </Col>
+              <Col xs={4} md={4}>
+                <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
+              </Col>
+              <Col xs={4} md={4}>
+                <Button onClick={() => props.removeItem(index)} className="float-right" bsStyle="danger">X</Button>
+              </Col>
+            </Row>
           </ListGroupItem>
         );
         })}
@@ -25,17 +33,26 @@ const List = props => {
   }
 
   return (
-    <Row className="show-grid">
-      <Col xs={4} md={4}>
-        jhgjgjhghjgjhgjhgjhgjhgjhg
-      </Col>
-      <Col xs={4} md={4}>
-        jhgjgjhghjgjhgjhgjhgjhgjhg
-      </Col>
-      <Col xs={4} md={4}>
-        jhgjgjhghjgjhgjhgjhgjhgjhg
-      </Col>
-    </Row>
+    <ListGroup className="list-group">
+    {props.todos.map((todo) => {
+      let index = todo.index;
+      return (
+        <ListGroupItem key={todo.index} className="list-group-item">
+          <Row className="show-grid">
+            <Col xs={4} md={4}>
+              <Checkbox onClick={() => props.isSelected(todo)} className="float-left" ></Checkbox>
+            </Col>
+            <Col xs={4} md={4}>
+              <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
+            </Col>
+            <Col xs={4} md={4}>
+              <Button onClick={() => props.removeItem(index)} className="float-right" bsStyle="danger">X</Button>
+            </Col>
+          </Row>
+        </ListGroupItem>
+      );
+      })}
+    </ListGroup>
   )
 }
 
