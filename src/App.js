@@ -65,14 +65,13 @@ class App extends React.Component {
 
 
   handleFiltered() {
-    this.setState({
+    this.setState(prevState => ({
       filtered: !this.state.filtered
-    });
+    }));
   }
 
   handleSelected(todo) {
     todo.isSelected = !todo.isSelected;
-    console.log(todo);
   }
 
   removeSelected() {
@@ -80,15 +79,31 @@ class App extends React.Component {
       return todo.isSelected == false;
     });
     this.setState({
-      todos: unSelected
+      todos: unSelected,
+      allSelected: false
     });
-    console.table(unSelected);
   }
 
 
   selectAll() {
-   console.table(this.state.todos);
+    if(!this.state.allSelected) {
+      this.state.todos.map((todo) => {
+        return todo.isSelected = true;
+      });
+      this.setState({
+        allSelected: true
+      });
+    } else {
+      this.state.todos.map((todo) => {
+        return todo.isSelected = false;
+      });
+      this.setState({
+        allSelected: false
+      });
+    }
+    console.log(this.state.allSelected);
   }
+
   render() {
 
     return (
@@ -105,7 +120,7 @@ class App extends React.Component {
           <ButtonGroup bsSize="small" justified>
             <Button href='#' onClick={this.handleFiltered} >{(this.state.filtered) ? 'Show all' : 'Show done'}</Button>
             <Button href='#' onClick={this.removeSelected} >Remove selected Todos</Button>
-            <Button href='#' onClick={this.selectAll} >Select All</Button>
+            <Button href='#' onClick={this.selectAll} >{(this.state.allSelected) ? 'Unselect All' : 'Select All'}</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <List removeItem={this.handleRemoveItem} todos={this.state.todos} toggleDone={this.handleToggleDone} filtered={this.state.filtered} isSelected={this.handleSelected} />

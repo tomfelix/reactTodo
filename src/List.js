@@ -16,13 +16,13 @@ const List = props => {
           <ListGroupItem key={todo.index} className="list-group-item">
             <Row className="show-grid">
               <Col xs={4} md={4}>
-                <Checkbox onClick={() => props.isSelected(todo)} className="float-left" ></Checkbox>
+                <Checkbox className="check" onClick={() => props.isSelected(todo)} ></Checkbox>
               </Col>
               <Col xs={4} md={4}>
                 <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
               </Col>
               <Col xs={4} md={4}>
-                <Button onClick={() => props.removeItem(index)} className="float-right" bsStyle="danger">X</Button>
+                <Button onClick={() => props.removeItem(index)} bsStyle="danger">X</Button>
               </Col>
             </Row>
           </ListGroupItem>
@@ -40,13 +40,13 @@ const List = props => {
         <ListGroupItem key={todo.index} className="list-group-item">
           <Row className="show-grid">
             <Col xs={4} md={4}>
-              <Checkbox onClick={() => props.isSelected(todo)} className="float-left" ></Checkbox>
+              <Checkbox className="check" onClick={() => props.isSelected(todo)} ></Checkbox>
             </Col>
             <Col xs={4} md={4}>
               <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
             </Col>
             <Col xs={4} md={4}>
-              <Button onClick={() => props.removeItem(index)} className="float-right" bsStyle="danger">X</Button>
+              <Button onClick={() => props.removeItem(index)} bsStyle="danger">X</Button>
             </Col>
           </Row>
         </ListGroupItem>
