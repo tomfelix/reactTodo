@@ -40,7 +40,8 @@ class App extends React.Component {
     }
     this.setState({
       todos: [...this.state.todos, todo],
-      term: ''
+      term: '',
+      allSelected: false
     });
   }
 
@@ -86,21 +87,32 @@ class App extends React.Component {
 
 
   selectAll() {
-    if(!this.state.allSelected) {
-      this.state.todos.map((todo) => {
-        return todo.isSelected = true;
-      });
-      this.setState({
-        allSelected: true
-      });
+    let checkbox = document.getElementsByClassName('check');
+    if(this.state.todos.length > 0) {
+      if(!this.state.allSelected) {
+        this.state.todos.map((todo) => {
+          return todo.isSelected = true;
+        });
+        this.setState({
+          allSelected: true
+        });
+        checkbox.checked = true;
+      } else {
+        this.state.todos.map((todo) => {
+          return todo.isSelected = false;
+        });
+        this.setState({
+          allSelected: false
+        });
+        checkbox.checked = false;
+      }
     } else {
-      this.state.todos.map((todo) => {
-        return todo.isSelected = false;
-      });
       this.setState({
         allSelected: false
       });
     }
+
+
     console.log(this.state.allSelected);
   }
 
