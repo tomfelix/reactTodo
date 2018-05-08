@@ -16,7 +16,7 @@ const List = props => {
           <ListGroupItem key={todo.index} className="list-group-item">
             <Row className="show-grid">
               <Col xs={4} md={4}>
-                <Checkbox className="check" onClick={() => props.isSelected(todo)} ></Checkbox>
+                <Checkbox className="check" checked={!!todo.isSelected} onClick={() => props.isSelected(todo)} ></Checkbox>
               </Col>
               <Col xs={4} md={4}>
                 <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>
@@ -40,7 +40,7 @@ const List = props => {
         <ListGroupItem key={todo.index} className="list-group-item">
           <Row className="show-grid">
             <Col xs={4} md={4}>
-              <Checkbox className="check" onClick={() => props.isSelected(todo)} ></Checkbox>
+              <Checkbox className="check" checked={!!todo.isSelected} onChange={() => props.isSelected(todo)} ></Checkbox>
             </Col>
             <Col xs={4} md={4}>
               <p id={todo.index} onClick={() => props.toggleDone(todo)} >{todo.text}</p>

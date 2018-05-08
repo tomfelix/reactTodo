@@ -47,6 +47,11 @@ class App extends React.Component {
 
 
   handleRemoveItem = index => {
+    if(this.state.todos.length == 1) {
+      this.setState({
+        allSelected: false
+      });
+    }
     let pos = this.state.todos.map(function(todo) { return todo.index; }).indexOf(index);
     let slicedTodos = this.state.todos.slice(0, pos).concat(this.state.todos.slice(pos + 1));
     this.setState({
@@ -69,10 +74,21 @@ class App extends React.Component {
     this.setState(prevState => ({
       filtered: !this.state.filtered
     }));
+    console.log(this.state.todos);
+
   }
 
   handleSelected(todo) {
     todo.isSelected = !todo.isSelected;
+    let areSelected = this.state.todos.filter((todo) => {
+      return todo.isSelected == true;
+    });
+    if(areSelected.length != this.state.todos.length) {
+      this.setState({
+        allSelected: false
+      });
+    }
+    console.log(todo.isSelected);
   }
 
   removeSelected() {
@@ -87,7 +103,6 @@ class App extends React.Component {
 
 
   selectAll() {
-    let checkbox = document.getElementsByClassName('check');
     if(this.state.todos.length > 0) {
       if(!this.state.allSelected) {
         this.state.todos.map((todo) => {
@@ -96,7 +111,6 @@ class App extends React.Component {
         this.setState({
           allSelected: true
         });
-        checkbox.checked = true;
       } else {
         this.state.todos.map((todo) => {
           return todo.isSelected = false;
@@ -104,16 +118,12 @@ class App extends React.Component {
         this.setState({
           allSelected: false
         });
-        checkbox.checked = false;
       }
     } else {
       this.setState({
         allSelected: false
       });
     }
-
-
-    console.log(this.state.allSelected);
   }
 
   render() {
