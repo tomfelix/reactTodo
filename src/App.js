@@ -3,7 +3,7 @@ import './App.css';
 import List from './List';
 import {FormControl, Button, FormGroup, InputGroup, ButtonToolbar, ButtonGroup} from 'react-bootstrap';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +12,6 @@ class App extends React.Component {
       filtered: false,
       allSelected: false
     }
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
@@ -47,7 +46,7 @@ class App extends React.Component {
 
 
   handleRemoveItem = index => {
-    if(this.state.todos.length == 1) {
+    if(this.state.todos.length === 1) {
       this.setState({
         allSelected: false
       });
@@ -62,7 +61,7 @@ class App extends React.Component {
   handleToggleDone = todo => {
     let toggledTodo = document.getElementById(todo.index);
 
-    if(todo.isDone == false) {
+    if(todo.isDone === false) {
       toggledTodo.className = 'isDone';
       return todo.isDone = true;
     }   toggledTodo.classList.remove('isDone');
@@ -74,26 +73,23 @@ class App extends React.Component {
     this.setState(prevState => ({
       filtered: !this.state.filtered
     }));
-    console.log(this.state.todos);
-
   }
 
   handleSelected(todo) {
     todo.isSelected = !todo.isSelected;
     let areSelected = this.state.todos.filter((todo) => {
-      return todo.isSelected == true;
+      return todo.isSelected === true;
     });
-    if(areSelected.length != this.state.todos.length) {
+    if(areSelected.length !== this.state.todos.length) {
       this.setState({
         allSelected: false
       });
     }
-    console.log(todo.isSelected);
   }
 
   removeSelected() {
     let unSelected = this.state.todos.filter(todo => {
-      return todo.isSelected == false;
+      return todo.isSelected === false;
     });
     this.setState({
       todos: unSelected,
@@ -132,7 +128,7 @@ class App extends React.Component {
       <div className="container text-center">
         <FormGroup>
           <InputGroup>
-            <FormControl onKeyDown={(key) => {(key.keyCode == 13)? this.handleClick() : null}} value={this.state.term} type="text" className="form-control" placeholder="Add your todo..." onChange={this.handleInputChange} />
+          <FormControl onKeyDown={(key) => {(key.keyCode === 13)? this.handleClick() : null}} value={this.state.term} type="text" className="form-control" placeholder="Add your todo..." onChange={this.handleInputChange} />
             <InputGroup.Button>
               <Button id="addTodo" type="button" onClick={this.handleClick} className="success">Add todo</Button>
             </InputGroup.Button>
@@ -140,9 +136,9 @@ class App extends React.Component {
         </FormGroup>
         <ButtonToolbar>
           <ButtonGroup bsSize="small" justified>
-            <Button href='#' onClick={this.handleFiltered} >{(this.state.filtered) ? 'Show all' : 'Show done'}</Button>
-            <Button href='#' onClick={this.removeSelected} >Remove selected Todos</Button>
-            <Button href='#' onClick={this.selectAll} >{(this.state.allSelected) ? 'Unselect All' : 'Select All'}</Button>
+            <Button id="button_filtered" href='#' bsStyle={(this.state.filtered) ? 'warning' : 'success'} onClick={this.handleFiltered} >{(this.state.filtered) ? 'Show all' : 'Show done'}</Button>
+            <Button id="button_remove" href='#' bsStyle="danger" onClick={this.removeSelected} >Remove selected Todos</Button>
+            <Button id="button_selected" href='#' bsStyle={(this.state.allSelected) ? 'info' : 'primary'} onClick={this.selectAll} >{(this.state.allSelected) ? 'Unselect All' : 'Select All'}</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <List removeItem={this.handleRemoveItem} todos={this.state.todos} toggleDone={this.handleToggleDone} filtered={this.state.filtered} isSelected={this.handleSelected} />

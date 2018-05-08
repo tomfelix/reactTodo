@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {ListGroup, ListGroupItem, FormControl, Button, Checkbox, Row, Col} from 'react-bootstrap';
+import {ListGroup, ListGroupItem, Button, Checkbox, Row, Col} from 'react-bootstrap';
 
 const List = props => {
 
