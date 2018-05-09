@@ -130,7 +130,7 @@ class App extends Component {
           <InputGroup>
           <FormControl onKeyDown={(key) => {(key.keyCode === 13)? this.handleClick() : null}} value={this.state.term} type="text" className="form-control" placeholder="Add your todo..." onChange={this.handleInputChange} />
             <InputGroup.Button>
-              <Button id="addTodo" type="button" onClick={this.handleClick} className="success">Add todo</Button>
+              <Button id="addTodo" disabled={!this.state.term} type="button" onClick={this.handleClick} className="success">Add todo</Button>
             </InputGroup.Button>
           </InputGroup>
         </FormGroup>
